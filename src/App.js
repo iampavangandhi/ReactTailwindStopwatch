@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import tailwindLogo from "./assets/tailwindcss.svg";
 import "./css/app.css";
 
 function App() {
-  const [second, setSecond] = useState(0);
-  const [minute, setMinute] = useState(0);
+  const [time, setTime] = useState({ miliSecond: 0, second: 0, minute: 0 });
   const [exit, setExit] = useState(false);
   const [btnTxt, setBtnTxt] = useState("Start 🏁");
 
-  const handleClick = () => {
+  const handleAction = () => {
     if (btnTxt === "Pause ⏸️") {
-      setBtnTxt("Resume ▶️");
       setExit(!exit);
+      setBtnTxt("Resume ▶️");
+
       const element = document.createElement("li");
       const child = document.querySelector("#timings").childElementCount;
-      element.innerHTML = `${
-        child + 1
-      }) ${minute} minutes and ${second} seconds`;
+
+      element.innerHTML = `${child + 1}) ${
+        time.minute < 10 ? "0" + time.minute : time.minute
+      } mins, ${time.second < 10 ? "0" + time.second : time.second} secs & ${
+        time.miliSecond < 10 ? "0" + time.miliSecond : time.miliSecond
+      } mili secs`;
+
       element.classList.add(
         "bg-gray-300",
         "dark:bg-gray-600",
@@ -28,19 +34,19 @@ function App() {
         "text-semibold",
         "shadow-md"
       );
+
       document.querySelector("#timings").appendChild(element);
     } else {
-      setBtnTxt("Pause ⏸️");
       setExit(!exit);
+      setBtnTxt("Pause ⏸️");
     }
   };
 
   const handleReset = () => {
-    document.querySelector("#timings").innerHTML = "";
-    setBtnTxt("Start 🏁");
     setExit(false);
-    setSecond(0);
-    setMinute(0);
+    setBtnTxt("Start 🏁");
+    setTime({ miliSecond: 0, second: 0, minute: 0 });
+    document.querySelector("#timings").innerHTML = "";
   };
 
   const toggleMode = () => {
@@ -59,25 +65,27 @@ function App() {
     let interval = null;
     if (exit) {
       interval = setInterval(() => {
-        setSecond((val) => {
-          if (val === 59) {
-            setMinute(minute + 1);
-            return 0;
-          } else {
-            return val + 1;
+        setTime((val) => {
+          if (val.miliSecond === 99) {
+            return { ...val, miliSecond: 0, second: val.second + 1 };
           }
-        });
 
-        // Terminate condition
-        if (minute > 59) {
-          handleReset();
-        }
-      }, 1000);
+          if (val.second > 59) {
+            return { ...val, second: 0, minute: val.minute + 1 };
+          }
+
+          if (val.minute > 59) {
+            handleReset();
+          }
+
+          return { ...val, miliSecond: val.miliSecond + 1 };
+        });
+      }, 10);
     } else {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [exit, second, minute]);
+  }, [exit, time]);
 
   return (
     <>
@@ -111,23 +119,27 @@ function App() {
         </svg>
       </div>
       <div className="bg-gray-100 dark:bg-gray-800 min-h-screen h-full w-full flex flex-col items-center">
-        <h1 className="text-5xl text-black dark:text-gray-100 mt-24 m-3">
+        <h1 className="text-5xl text-black dark:text-gray-100 mt-32 m-3">
           Hello, Stopwatch
         </h1>
 
         <h4 className="text-2xl sm:text-xl text-black dark:text-gray-100 flex mx-4 my-1 mb-3 italic">
           This is a simple stopwatch using TailwindCSS v2.0.
         </h4>
-        <div className="bg-gray-200 dark:bg-gray-800 border-8 border-gray-500 dark:border-gray-200 m-4 rounded-full h-64 w-64 flex items-center justify-center">
-          <h1 className="text-7xl text-black dark:text-gray-100">
-            {minute < 10 ? "0" + minute : minute}:
-            {second < 10 ? "0" + second : second}
+        <div
+          onClick={handleAction}
+          className="bg-gray-200 dark:bg-gray-800 border-8 border-gray-500 dark:border-gray-200 m-4 p-2 rounded-full h-72 w-72 flex items-center justify-center"
+        >
+          <h1 className="text-6xl text-black dark:text-gray-100">
+            {time.minute < 10 ? "0" + time.minute : time.minute}:
+            {time.second < 10 ? "0" + time.second : time.second}:
+            {time.miliSecond < 10 ? "0" + time.miliSecond : time.miliSecond}
           </h1>
         </div>
         <div className="my-2">
           <button
             className="bg-blue-600 dark:bg-blue-500 m-3 text-white font-semibold rounded-md p-2 inline-flex items-center justify-center hover:bg-blue-700 dark:hover:bg-blue-600 h-10 w-32"
-            onClick={handleClick}
+            onClick={handleAction}
           >
             {btnTxt}
           </button>
@@ -139,6 +151,19 @@ function App() {
           </button>
         </div>
         <ul id="timings" className="mb-5"></ul>
+        <footer className="text-lg text-black dark:text-gray-100 flex m-2">
+          Made with{" "}
+          <img className="mx-1 h-6" src={reactLogo} alt="react-logo" />
+          and
+          <img className="m-1 h-4" src={tailwindLogo} alt="tailwindcss-logo" />
+          by{" "}
+          <a
+            className="mx-1 text-blue-500"
+            href="http://github.com/iampavangandhi"
+          >
+            Pavan Gandhi
+          </a>
+        </footer>
       </div>
     </>
   );
