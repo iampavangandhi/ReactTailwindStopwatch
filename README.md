@@ -6,10 +6,14 @@
 
 </div>
 
-## Screenshots
+## Stopwatch WebApp Screenshots
 
-<img src="public/ss-light.png" alt="logo" width="300"/>
-<img src="public/ss-dark.png" alt="logo" width="300"/>
+<div>
+
+<img style="margin: 10px" src="public/ss-light.png" alt="logo" width="300"/>
+<img style="margin: 10px" src="public/ss-dark.png" alt="logo" width="300"/>
+
+</div>
 
 <br/>
 
