@@ -11,7 +11,9 @@
 ## Tech Stack
 
 <code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="javascript"></code>
+&nbsp;
 <code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" alt="react"></code>
+&nbsp;
 <code><img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/tailwind/tailwind.png" alt="tailwind"></code>
 
 ## Build Setup
@@ -32,6 +34,7 @@ yarn build
 <div>
 
 <img src="public/ss-light.png" alt="logo" width="300"/>
+&nbsp;&nbsp;
 <img src="public/ss-dark.png" alt="logo" width="300"/>
 
 </div>
