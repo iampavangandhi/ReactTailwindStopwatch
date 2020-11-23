@@ -6,16 +6,7 @@
 
 </div>
 
-## Stopwatch WebApp Screenshots
-
-<div>
-
-<img style="margin: 10px" src="public/ss-light.png" alt="logo" width="300"/>
-<img style="margin: 10px" src="public/ss-dark.png" alt="logo" width="300"/>
-
-</div>
-
-<br/>
+<br />
 
 ## Tech Stack
 
@@ -35,6 +26,19 @@ yarn start
 # builds the app for production to the build folder.
 yarn build
 ```
+
+## Stopwatch WebApp Screenshots
+
+<div>
+
+<img src="public/ss-light.png" alt="logo" width="300"/>
+<img src="public/ss-dark.png" alt="logo" width="300"/>
+
+</div>
+
+## Deploys
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b5a92f50-3570-45a9-a49b-89328b9a0448/deploy-status)](https://app.netlify.com/sites/reacttailwindstopwatch/deploys)
 
 ## Contributing
 
