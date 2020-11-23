@@ -5,7 +5,7 @@ import Heading from "./components/Heading";
 import Stopwatch from "./components/Stopwatch";
 import Controls from "./components/Controls";
 import Laps from "./components/Laps";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer.jsx";
 import "./css/app.css";
 
 function App() {
