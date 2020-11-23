@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Toggle from "./components/Toggle";
 import AppLayout from "./components/AppLayout";
 import Heading from "./components/Heading";
@@ -60,7 +60,7 @@ function App() {
   }, [exit]);
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 min-h-screen h-full w-full flex flex-col items-center">
+    <AppLayout>
       <Toggle />
       <Heading />
       <Stopwatch actionHandler={handleAction} time={time} />
@@ -75,7 +75,7 @@ function App() {
       />
       <Laps />
       <Footer />
-    </div>
+    </AppLayout>
   );
 }
 
